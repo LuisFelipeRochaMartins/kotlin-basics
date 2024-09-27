@@ -1,5 +1,6 @@
 package br.com.luisfeliperochamartins.alugames.models
 
+import java.time.LocalDate
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -16,6 +17,7 @@ data class Gamer(var name: String, var email: String) {
     var id: String ? = null
         private set
     val searchGames = mutableListOf<Game?>()
+    val rentedGames = mutableListOf<Rent?>()
 
     constructor(name: String, email: String, dateOfBirth: String, username: String) : this(name, email) {
         this.dateOfBirth = dateOfBirth
@@ -49,6 +51,13 @@ data class Gamer(var name: String, var email: String) {
             throw IllegalArgumentException("Name invalid")
         }
         return name
+    }
+
+    fun rentGame(game: Game, periodOfDays: PeriodOfDays): Rent {
+        val rent = Rent(this, game, periodOfDays)
+        rentedGames.add(rent)
+
+        return rent
     }
 
     companion object {
