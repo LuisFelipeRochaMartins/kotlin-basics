@@ -4,5 +4,5 @@ interface Recommendation {
 
     val average: Double
 
-    fun recomemend(evaluation: Int)
+    fun recommend(evaluation: Int)
 }

@@ -8,7 +8,7 @@ import br.com.luisfeliperochamartins.alugames.models.plan.LoosePlan
 import java.util.Scanner
 import kotlin.random.Random
 
-data class Gamer(var name: String, var email: String) : Recommendation {
+data class Gamer(var name: String, var email: String) {
 
     var dateOfBirth: String ? = null
     var username: String ? = null
@@ -24,10 +24,6 @@ data class Gamer(var name: String, var email: String) : Recommendation {
     val searchGames = mutableListOf<Game?>()
     private val rentedGames = mutableListOf<Rent?>()
 
-    override val average: Double
-        get() = evaluationList.average()
-
-    private val evaluationList= mutableListOf<Int>()
 
     constructor(name: String, email: String, dateOfBirth: String, username: String) : this(name, email) {
         this.dateOfBirth = dateOfBirth
@@ -76,8 +72,9 @@ data class Gamer(var name: String, var email: String) : Recommendation {
             .map { rent ->  rent!!.game}
     }
 
-    override fun recomemend(evaluation: Int) {
-        evaluationList.add(evaluation)
+    fun recommendGame(game: Game, evaluation: Int) {
+        game.recommend(evaluation)
+        game.recommendedGames.add(game)
     }
 
     companion object {
@@ -105,6 +102,6 @@ data class Gamer(var name: String, var email: String) : Recommendation {
     }
 
     override fun toString(): String {
-        return "Gamer(name='$name', email='$email', dateOfBirth=$dateOfBirth, username=$username, id=$id, plan=$plan, searchGames=$searchGames, rentedGames=$rentedGames, evaluationList=$evaluationList, average=$average)"
+        return "Gamer(name='$name', email='$email', dateOfBirth=$dateOfBirth, username=$username, id=$id, plan=$plan, searchGames=$searchGames, rentedGames=$rentedGames)"
     }
 }
