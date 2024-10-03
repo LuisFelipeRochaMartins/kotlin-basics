@@ -1,6 +1,9 @@
-package br.com.luisfeliperochamartins.alugames.models
+package br.com.luisfeliperochamartins.alugames.models.gamer
 
-import java.time.LocalDate
+import br.com.luisfeliperochamartins.alugames.models.game.Game
+import br.com.luisfeliperochamartins.alugames.models.PeriodOfDays
+import br.com.luisfeliperochamartins.alugames.models.Rent
+import br.com.luisfeliperochamartins.alugames.models.plan.LoosePlan
 import java.util.Scanner
 import kotlin.random.Random
 
@@ -16,6 +19,7 @@ data class Gamer(var name: String, var email: String) {
         }
     var id: String ? = null
         private set
+    val plan = LoosePlan("BRONZE")
     val searchGames = mutableListOf<Game?>()
     val rentedGames = mutableListOf<Rent?>()
 
@@ -58,6 +62,12 @@ data class Gamer(var name: String, var email: String) {
         rentedGames.add(rent)
 
         return rent
+    }
+
+    fun gamesRentedAtMonth(mes:Int): List<Game> {
+        return rentedGames
+            .filter { rent ->  rent!!.periodOfDays.startOfRent.monthValue == mes}
+            .map { rent ->  rent!!.game}
     }
 
     companion object {

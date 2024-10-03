@@ -1,4 +1,4 @@
-package br.com.luisfeliperochamartins.alugames.models
+package br.com.luisfeliperochamartins.alugames.models.gamer
 
 import com.google.gson.annotations.SerializedName
 

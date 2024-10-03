@@ -1,6 +1,10 @@
 package br.com.luisfeliperochamartins.alugames.services
 
-import br.com.luisfeliperochamartins.alugames.models.*
+import br.com.luisfeliperochamartins.alugames.models.game.Game
+import br.com.luisfeliperochamartins.alugames.models.game.InfoGame
+import br.com.luisfeliperochamartins.alugames.models.game.InfoGameJson
+import br.com.luisfeliperochamartins.alugames.models.gamer.Gamer
+import br.com.luisfeliperochamartins.alugames.models.gamer.InfoGamer
 import br.com.luisfeliperochamartins.alugames.utils.toGame
 import com.google.gson.Gson
 import br.com.luisfeliperochamartins.alugames.utils.toGamer

@@ -1,7 +1,7 @@
 package br.com.luisfeliperochamartins.alugames.main
 
-import br.com.luisfeliperochamartins.alugames.models.Game
-import br.com.luisfeliperochamartins.alugames.models.Gamer
+import br.com.luisfeliperochamartins.alugames.models.game.Game
+import br.com.luisfeliperochamartins.alugames.models.gamer.Gamer
 import br.com.luisfeliperochamartins.alugames.services.RequestHandler
 import br.com.luisfeliperochamartins.alugames.utils.transformAge
 
