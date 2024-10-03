@@ -2,12 +2,13 @@ package br.com.luisfeliperochamartins.alugames.models.gamer
 
 import br.com.luisfeliperochamartins.alugames.models.game.Game
 import br.com.luisfeliperochamartins.alugames.models.PeriodOfDays
+import br.com.luisfeliperochamartins.alugames.models.Recommendation
 import br.com.luisfeliperochamartins.alugames.models.Rent
 import br.com.luisfeliperochamartins.alugames.models.plan.LoosePlan
 import java.util.Scanner
 import kotlin.random.Random
 
-data class Gamer(var name: String, var email: String) {
+data class Gamer(var name: String, var email: String) : Recommendation {
 
     var dateOfBirth: String ? = null
     var username: String ? = null
@@ -21,7 +22,12 @@ data class Gamer(var name: String, var email: String) {
         private set
     val plan = LoosePlan("BRONZE")
     val searchGames = mutableListOf<Game?>()
-    val rentedGames = mutableListOf<Rent?>()
+    private val rentedGames = mutableListOf<Rent?>()
+
+    override val average: Double
+        get() = evaluationList.average()
+
+    private val evaluationList= mutableListOf<Int>()
 
     constructor(name: String, email: String, dateOfBirth: String, username: String) : this(name, email) {
         this.dateOfBirth = dateOfBirth
@@ -70,6 +76,10 @@ data class Gamer(var name: String, var email: String) {
             .map { rent ->  rent!!.game}
     }
 
+    override fun recomemend(evaluation: Int) {
+        evaluationList.add(evaluation)
+    }
+
     companion object {
         fun createGamer(input: Scanner): Gamer {
             print("Welcome to AluGames! Let's make your register. What is your name? :")
@@ -95,6 +105,6 @@ data class Gamer(var name: String, var email: String) {
     }
 
     override fun toString(): String {
-        return "Gamer(name='$name', email='$email', dateOfBirth=$dateOfBirth, username=$username, id=$id)"
+        return "Gamer(name='$name', email='$email', dateOfBirth=$dateOfBirth, username=$username, id=$id, plan=$plan, searchGames=$searchGames, rentedGames=$rentedGames, evaluationList=$evaluationList, average=$average)"
     }
 }

@@ -2,7 +2,10 @@ package br.com.luisfeliperochamartins.alugames.models.plan
 
 import br.com.luisfeliperochamartins.alugames.models.Rent
 
-class SubscriptionPlan(type: String, val fee: Double, val includedGames: Int) : Plan(type) {
+class SubscriptionPlan(type: String,
+                       val fee: Double,
+                       private val includedGames: Int,
+                       private val discountPercentage: Double) : Plan(type) {
 
     override fun getRentValue(rent: Rent) : Double {
         val totalGamesRented = rent.gamer.gamesRentedAtMonth(rent.periodOfDays.startOfRent.monthValue).size
@@ -10,7 +13,11 @@ class SubscriptionPlan(type: String, val fee: Double, val includedGames: Int) : 
         return if (totalGamesRented <= includedGames)  {
             0.0
         } else {
-            super.getRentValue(rent)
+            var originalValue = super.getRentValue(rent)
+            if (rent.gamer.average > 8) {
+                originalValue -= originalValue * discountPercentage
+            }
+            originalValue
         }
     }
 }
